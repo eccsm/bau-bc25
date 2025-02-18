@@ -33,13 +33,22 @@ This project simulates a business process workflow using Java design patterns su
 
     Implemented in SagaConfig to provide a thread-safe, lazily initialized global configuration.
 
+    ![Singleton Pattern](singleton.webp)
+
+    
 - **Strategy Pattern:**
 
     Used for flexible payment processing by allowing multiple payment strategies.
 
+    ![Strategy Pattern](strategy.webp)
+
+    
 - **Saga Pattern:**
 
     Coordinates distributed transactions and includes compensation steps for robust error handling.
+
+    ![Saga Pattern](saga.webp)
+  
 
 ## Additional Information
 - **Purpose:**
