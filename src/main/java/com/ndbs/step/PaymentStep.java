@@ -26,8 +26,10 @@ public class PaymentStep {
             throw new Exception("Payment failed!");
         }
 
+
         // Mark order as paid
         order.setPaid(true);
+        order.setStatus("Paid");
         config.log("PaymentStep - " + result);
     }
 

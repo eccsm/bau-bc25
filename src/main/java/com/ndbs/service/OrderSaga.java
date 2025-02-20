@@ -19,6 +19,8 @@ public class OrderSaga {
         SagaConfig config = SagaConfig.getInstance();
         config.log("Starting Saga for order: " + order.getOrderId());
 
+
+
         try {
             paymentStep.execute(order);
             inventoryStep.execute(order);

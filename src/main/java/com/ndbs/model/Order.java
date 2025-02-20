@@ -1,7 +1,10 @@
 package com.ndbs.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // Represents an Order in the system
-public class Order {
+public class Order implements OrderStatusSubject {
     private final String orderId;
     private final double amount;
     private boolean paid;
@@ -9,10 +12,13 @@ public class Order {
     private boolean notified;
     private String paymentMethod;
     private String deliveryCompany;
+    private final List<OrderStatusObserver> observers = new ArrayList<>();
+    private String status;
 
     public Order(String orderId, double amount) {
         this.orderId = orderId;
         this.amount = amount;
+        this.status = "Created";
     }
 
     // Getters and setters
@@ -62,6 +68,32 @@ public class Order {
 
     public void setDeliveryCompany(String deliveryCompany) {
         this.deliveryCompany = deliveryCompany;
+    }
+
+    @Override
+    public void attach(OrderStatusObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void detach(OrderStatusObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (OrderStatusObserver observer : observers) {
+            observer.update(this);
+        }
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+        notifyObservers();
+    }
+
+    public String getStatus() {
+        return status;
     }
 }
 
